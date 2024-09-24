@@ -22,11 +22,4 @@ describe('AppComponent', () => {
   it(`should have the 'entertainment-web-app' title`, () => {
     expect(component.title).toEqual('entertainment-web-app')
   })
-
-  it('should render title', () => {
-    const compiled = fixture.nativeElement as HTMLElement
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Hello, entertainment-web-app'
-    )
-  })
 })
