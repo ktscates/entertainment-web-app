@@ -5,11 +5,15 @@ import { of } from 'rxjs'
 import { MovieService } from '../../services/movie/movie.service'
 import * as SearchActions from '../actions/search.actions'
 import { Movie, TvShow } from '../../model/model'
+import { BookmarkService } from '../../services/bookmark/bookmark.service'
 
 @Injectable()
 export class SearchEffects {
   private actions$ = inject(Actions)
-  constructor(private movieService: MovieService) {}
+  constructor(
+    private movieService: MovieService,
+    private bookmarkService: BookmarkService
+  ) {}
 
   searchMoviesAndShows$ = createEffect(() =>
     this.actions$.pipe(

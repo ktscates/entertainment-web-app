@@ -5,6 +5,8 @@ import { SearchComponent } from './components/search/search.component'
 import { AuthComponent } from './components/auth/auth.component'
 import { AuthService } from './services/auth/auth.service'
 import { MovieService } from './services/movie/movie.service'
+import { Store } from '@ngrx/store'
+import { initApp } from './store/actions/bookmark.actions'
 
 @Component({
   selector: 'app-root',
@@ -21,7 +23,7 @@ export class AppComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private movieService: MovieService
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -32,5 +34,6 @@ export class AppComponent implements OnInit {
         this.router.navigate(['/'])
       }
     })
+    this.store.dispatch(initApp())
   }
 }

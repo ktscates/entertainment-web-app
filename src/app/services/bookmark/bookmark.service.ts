@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core'
+import { Movie, TvShow } from '../../model/model'
+import { Observable, of } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -8,20 +10,20 @@ export class BookmarkService {
 
   constructor() {}
 
-  getBookmarks(): any[] {
+  getBookmarks(): (Movie | TvShow)[] {
     return JSON.parse(localStorage.getItem(this.BOOKMARK_KEY) || '[]')
   }
 
-  saveBookmarks(bookmarks: any[]): void {
+  saveBookmarks(bookmarks: (Movie | TvShow)[]): void {
     localStorage.setItem(this.BOOKMARK_KEY, JSON.stringify(bookmarks))
   }
 
-  isBookmarked(item: any): boolean {
+  isBookmarked(item: Movie | TvShow): boolean {
     const bookmarks = this.getBookmarks()
     return bookmarks.some(bookmark => bookmark.id === item.id)
   }
 
-  toggleBookmark(item: any): void {
+  toggleBookmark(item: Movie | TvShow): void {
     let bookmarks = this.getBookmarks()
     if (this.isBookmarked(item)) {
       // Remove the bookmark
@@ -31,5 +33,11 @@ export class BookmarkService {
       bookmarks.push(item)
     }
     this.saveBookmarks(bookmarks)
+  }
+
+  // Method to load bookmarks on app initialization
+  loadBookmarks(): void {
+    const bookmarks = this.getBookmarks()
+    console.log('Loading bookmarks from localStorage:', bookmarks)
   }
 }

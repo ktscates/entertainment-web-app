@@ -8,22 +8,22 @@
     class="flex lg:flex-col flex-row gap-10 xl:-mt-[500px] lg:-mt-[300px] items-center"
   >
     <app-icons
-      class="md:w-5 md:h-5 w-4 h-4"
+      class="md:w-5 md:h-5 w-4 h-4 cursor-pointer"
       iconType="icon-nav-home"
       (click)="navigateTo('home')"
     />
     <app-icons
-      class="md:w-5 md:h-5 w-4 h-4"
+      class="md:w-5 md:h-5 w-4 h-4 cursor-pointer"
       iconType="icon-nav-movies"
       (click)="navigateTo('movies')"
     />
     <app-icons
-      class="md:w-5 md:h-5 w-4 h-4"
+      class="md:w-5 md:h-5 w-4 h-4 cursor-pointer"
       iconType="icon-nav-tv"
       (click)="navigateTo('shows')"
     />
     <app-icons
-      class="md:w-5 md:h-5 w-4 h-4"
+      class="md:w-5 md:h-5 w-4 h-4 cursor-pointer"
       iconType="icon-nav-bookmark"
       (click)="navigateTo('bookmarks')"
     />
@@ -32,7 +32,7 @@
   <!-- Avatar section -->
   <div>
     <img
-      class="lg:w-10 lg:h-10 md:w-8 md:h-8 w-6 h-6 border border-white rounded-full"
+      class="lg:w-10 lg:h-10 md:w-8 md:h-8 w-6 h-6 border border-white rounded-full cursor-pointer"
       src="assets/avatar.png"
       alt="Avatar"
       (click)="onLogout()"

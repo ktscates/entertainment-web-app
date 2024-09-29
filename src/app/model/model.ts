@@ -14,9 +14,8 @@ export interface Movie {
   video: boolean
   vote_average: number
   vote_count: number
-  name: string
   first_air_date: string
-  isBookmarked: boolean
+  name: string
 }
 
 export interface TvShow {
@@ -35,4 +34,6 @@ export interface TvShow {
   poster_path: string
   vote_average: number
   vote_count: number
+  title: string
+  release_date: string
 }

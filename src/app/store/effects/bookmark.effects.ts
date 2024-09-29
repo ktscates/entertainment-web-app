@@ -1,8 +1,8 @@
 // effects/bookmark.effects.ts
 import { Injectable, inject } from '@angular/core'
 import { Actions, createEffect, ofType } from '@ngrx/effects'
-import { addBookmark, removeBookmark } from '../actions/bookmark.actions'
-import { tap } from 'rxjs/operators'
+import * as BookmarkActions from '../actions/bookmark.actions'
+import { map, tap } from 'rxjs/operators'
 import { BookmarkService } from '../../services/bookmark/bookmark.service'
 
 @Injectable()
@@ -13,7 +13,7 @@ export class BookmarkEffects {
   saveBookmark$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(addBookmark),
+        ofType(BookmarkActions.addBookmark),
         tap(({ item }) => this.bookmarkService.toggleBookmark(item))
       ),
     { dispatch: false }
@@ -22,7 +22,7 @@ export class BookmarkEffects {
   removeBookmark$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(removeBookmark),
+        ofType(BookmarkActions.removeBookmark),
         tap(({ itemId }) => {
           const bookmarks = this.bookmarkService.getBookmarks()
           const updatedBookmarks = bookmarks.filter(b => b.id !== itemId)
@@ -30,5 +30,13 @@ export class BookmarkEffects {
         })
       ),
     { dispatch: false }
+  )
+
+  // Effect to load bookmarks when the app initializes
+  loadBookmarks$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BookmarkActions.initApp), // Listen for the initApp action
+      map(() => BookmarkActions.loadBookmarks()) // Dispatch loadBookmarks
+    )
   )
 }
