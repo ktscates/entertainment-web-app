@@ -1,7 +1,7 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { SidenavComponent } from '../sidenav/sidenav.component'
 import { SearchComponent } from '../search/search.component'
-import { map, Observable, of } from 'rxjs'
+import { map, Observable } from 'rxjs'
 import { Store } from '@ngrx/store'
 import { selectAllBookmarks } from '../../store/selectors/bookmark.selectors'
 import { Movie, TvShow } from '../../model/model'
@@ -22,7 +22,7 @@ import { TrendingCardComponent } from '../trending-card/trending-card.component'
   templateUrl: './bookmark.component.html',
   styleUrl: './bookmark.component.css',
 })
-export class BookmarkComponent {
+export class BookmarkComponent implements OnInit {
   bookmarkMovies$!: Observable<(Movie | TvShow)[]> // Observable to hold the bookmarks
   error$!: Observable<string | null> // Error observable
   searchQuery: string = ''

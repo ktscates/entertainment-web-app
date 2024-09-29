@@ -17,7 +17,7 @@ export const RecommendedMovieReducer = createReducer(
   initialState,
   on(
     RecommendedMovieActions.fetchRecommendedMoviesSuccess,
-    (state, { movies }) => ({
+    (state, { movies }): RecommendedMovieState => ({
       ...state,
       movies,
       error: null,
@@ -25,7 +25,7 @@ export const RecommendedMovieReducer = createReducer(
   ),
   on(
     RecommendedMovieActions.fetchRecommendedMoviesFailure,
-    (state, { error }) => ({
+    (state, { error }): RecommendedMovieState => ({
       ...state,
       error,
     })

@@ -15,13 +15,19 @@ export const initialState: TrendingState = {
 
 export const trendingReducer = createReducer(
   initialState,
-  on(TrendingActions.fetchTrendingMoviesSuccess, (state, { movies }) => ({
-    ...state,
-    movies,
-    error: null,
-  })),
-  on(TrendingActions.fetchTrendingMoviesFailure, (state, { error }) => ({
-    ...state,
-    error,
-  }))
+  on(
+    TrendingActions.fetchTrendingMoviesSuccess,
+    (state, { movies }): TrendingState => ({
+      ...state,
+      movies,
+      error: null,
+    })
+  ),
+  on(
+    TrendingActions.fetchTrendingMoviesFailure,
+    (state, { error }): TrendingState => ({
+      ...state,
+      error,
+    })
+  )
 )

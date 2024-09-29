@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Movie, TvShow } from '../../model/model'
 import { CommonModule } from '@angular/common'
 import { IconsComponent } from '../icons/icons.component'
@@ -14,7 +14,7 @@ import * as BookmarkActions from '../../store/actions/bookmark.actions'
   templateUrl: './movie-card.component.html',
   styleUrl: './movie-card.component.css',
 })
-export class MovieCardComponent {
+export class MovieCardComponent implements OnInit {
   @Input() movie!: Movie
   @Input() show!: TvShow
   @Input() item!: Movie | TvShow

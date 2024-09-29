@@ -37,3 +37,8 @@ export interface TvShow {
   title: string
   release_date: string
 }
+
+export interface ApiResponse<T> {
+  results: T[]
+  // Add pagination properties if needed
+}

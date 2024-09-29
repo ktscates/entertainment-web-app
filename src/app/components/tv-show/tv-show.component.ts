@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { SidenavComponent } from '../sidenav/sidenav.component'
 import { SearchComponent } from '../search/search.component'
 import { Observable } from 'rxjs'
@@ -23,10 +23,10 @@ import { MovieCardComponent } from '../movie-card/movie-card.component'
   templateUrl: './tv-show.component.html',
   styleUrl: './tv-show.component.css',
 })
-export class TvShowComponent {
+export class TvShowComponent implements OnInit {
   shows$!: Observable<TvShow[]> // Observable for trending movies
   searchResults$!: Observable<TvShow[]> // Observable for search results
-  error$!: Observable<string | null> // Error observable
+  error$!: Observable<unknown> // Error observable
   searchQuery: string = ''
 
   constructor(private store: Store) {}

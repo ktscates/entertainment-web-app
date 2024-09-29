@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Movie, TvShow } from '../../model/model'
 import { CommonModule } from '@angular/common'
 import { IconsComponent } from '../icons/icons.component'
@@ -14,7 +14,7 @@ import * as BookmarkActions from '../../store/actions/bookmark.actions'
   templateUrl: './trending-card.component.html',
   styleUrl: './trending-card.component.css',
 })
-export class TrendingCardComponent {
+export class TrendingCardComponent implements OnInit {
   @Input() movie!: Movie // Assuming Movie model is defined and imported
   bookmarks$!: Observable<(Movie | TvShow)[]>
   isBookmarked: boolean = false // Track if the item is bookmarked

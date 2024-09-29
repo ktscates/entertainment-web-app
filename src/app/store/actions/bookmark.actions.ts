@@ -15,7 +15,7 @@ export const loadBookmarksSuccess = createAction(
 // Action to handle loading bookmarks failure
 export const loadBookmarksFailure = createAction(
   '[Bookmark] Load Bookmarks Failure',
-  props<{ error: any }>() // You can specify a more detailed error type if necessary
+  props<{ error: unknown }>() // You can specify a more detailed error type if necessary
 )
 
 export const addBookmark = createAction(

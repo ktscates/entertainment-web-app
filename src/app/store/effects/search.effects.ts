@@ -20,9 +20,13 @@ export class SearchEffects {
       ofType(SearchActions.searchMoviesAndShows),
       mergeMap(({ query }) =>
         this.movieService.searchMoviesAndShows(query).pipe(
-          map((movies: Movie[]) =>
-            SearchActions.searchMoviesAndShowsSuccess({ movies })
-          ),
+          map((results: (Movie | TvShow)[]) => {
+            // Filter the results to only include movies
+            const movies = results.filter(
+              (item): item is Movie => 'title' in item
+            )
+            return SearchActions.searchMoviesAndShowsSuccess({ movies })
+          }),
           catchError(error =>
             of(SearchActions.searchMoviesAndShowsFailure({ error }))
           )

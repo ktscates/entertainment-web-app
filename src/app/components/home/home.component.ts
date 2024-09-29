@@ -2,18 +2,17 @@ import { Component, OnInit } from '@angular/core'
 import { SidenavComponent } from '../sidenav/sidenav.component'
 import { SearchComponent } from '../search/search.component'
 import { RouterOutlet } from '@angular/router'
-import { catchError, Observable, of } from 'rxjs'
+import { Observable } from 'rxjs'
 import { CommonModule } from '@angular/common'
 import { Store } from '@ngrx/store'
 import * as SearchActions from '../../store/actions/search.actions'
 import { Movie } from '../../model/model'
 import * as searchSelectors from '../../store/selectors/search.selectors'
-import * as TrendingActions from '../../store/actions/trending.actions'
 import * as TrendingSelectors from '../../store/selectors/trending.selectors'
 import { MovieCardComponent } from '../movie-card/movie-card.component'
 import { TrendingCardComponent } from '../trending-card/trending-card.component'
-import * as RecommendedActions from '../../store/actions/recommended.actions'
 import * as RecommendedSelectors from '../../store/selectors/recommended.selectors'
+import { loadInitialMovies } from '../../store/actions/movie.actions'
 
 @Component({
   selector: 'app-home',
@@ -33,7 +32,7 @@ export class HomeComponent implements OnInit {
   trendingMovies$!: Observable<Movie[]> // Observable for trending movies
   recommendedMovies$!: Observable<Movie[]>
   searchResults$!: Observable<Movie[]> // Observable for search results
-  error$!: Observable<string | null> // Error observable
+  error$!: Observable<unknown> // Error observable
   searchQuery: string = ''
 
   constructor(private store: Store) {}
@@ -51,10 +50,7 @@ export class HomeComponent implements OnInit {
     )
     this.error$ = this.store.select(searchSelectors.selectError)
 
-    // Fetch trending movies on init
-    this.store.dispatch(TrendingActions.fetchTrendingMovies())
-    // Fetch recommended movies on init
-    this.store.dispatch(RecommendedActions.fetchRecommendedMovies())
+    this.store.dispatch(loadInitialMovies())
   }
 
   onSearch(query: string): void {

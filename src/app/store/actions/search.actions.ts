@@ -16,7 +16,7 @@ export const searchMoviesAndShowsSuccess = createAction(
 // Action for failed search result
 export const searchMoviesAndShowsFailure = createAction(
   '[Search] Search Movies and Shows Failure',
-  props<{ error: any }>()
+  props<{ error: unknown }>()
 )
 
 // Action to initiate the search
@@ -34,7 +34,7 @@ export const searchMoviesSuccess = createAction(
 // Action for failed search result
 export const searchMoviesFailure = createAction(
   '[Search Movies] Search Movies only',
-  props<{ error: any }>()
+  props<{ error: unknown }>()
 )
 
 // Action to initiate the search
@@ -52,5 +52,5 @@ export const searchShowsSuccess = createAction(
 // Action for failed search result
 export const searchShowsFailure = createAction(
   '[Search Shows] Search Shows only',
-  props<{ error: any }>()
+  props<{ error: unknown }>()
 )

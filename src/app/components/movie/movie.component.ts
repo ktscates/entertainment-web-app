@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { SidenavComponent } from '../sidenav/sidenav.component'
 import { SearchComponent } from '../search/search.component'
 import { Observable } from 'rxjs'
@@ -23,10 +23,10 @@ import { MovieCardComponent } from '../movie-card/movie-card.component'
   templateUrl: './movie.component.html',
   styleUrl: './movie.component.css',
 })
-export class MovieComponent {
+export class MovieComponent implements OnInit {
   movies$!: Observable<Movie[]> // Observable for trending movies
   searchResults$!: Observable<Movie[]> // Observable for search results
-  error$!: Observable<string | null> // Error observable
+  error$!: Observable<unknown> // Error observable
   searchQuery: string = ''
 
   constructor(private store: Store) {}

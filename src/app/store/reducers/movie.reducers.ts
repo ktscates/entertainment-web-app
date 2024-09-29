@@ -15,13 +15,19 @@ export const initialState: MovieState = {
 
 export const movieReducer = createReducer(
   initialState,
-  on(MovieActions.fetchMoviesSuccess, (state, { movies }) => ({
-    ...state,
-    movies,
-    error: null,
-  })),
-  on(MovieActions.fetchMoviesFailure, (state, { error }) => ({
-    ...state,
-    error,
-  }))
+  on(
+    MovieActions.fetchMoviesSuccess,
+    (state, { movies }): MovieState => ({
+      ...state,
+      movies,
+      error: null,
+    })
+  ),
+  on(
+    MovieActions.fetchMoviesFailure,
+    (state, { error }): MovieState => ({
+      ...state,
+      error,
+    })
+  )
 )

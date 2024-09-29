@@ -6,7 +6,7 @@ export interface SearchState {
   movies: Movie[] // Now typed with Movie[]
   shows: TvShow[]
   loading: boolean
-  error: string | null
+  error: unknown
 }
 
 export const initialState: SearchState = {
@@ -18,50 +18,77 @@ export const initialState: SearchState = {
 
 export const searchReducer = createReducer(
   initialState,
-  on(SearchActions.searchMoviesAndShows, state => ({
-    ...state,
-    loading: true,
-    error: null,
-  })),
-  on(SearchActions.searchMoviesAndShowsSuccess, (state, { movies }) => ({
-    ...state,
-    loading: false,
-    movies: movies, // Update with Movie[] data
-  })),
-  on(SearchActions.searchMoviesAndShowsFailure, (state, { error }) => ({
-    ...state,
-    loading: false,
-    error: error,
-  })),
-  on(SearchActions.searchMovies, state => ({
-    ...state,
-    loading: true,
-    error: null,
-  })),
-  on(SearchActions.searchMoviesSuccess, (state, { movies }) => ({
-    ...state,
-    loading: false,
-    movies: movies, // Update with Movie[] data
-  })),
-  on(SearchActions.searchMoviesFailure, (state, { error }) => ({
-    ...state,
-    loading: false,
-    error: error,
-  })),
+  on(
+    SearchActions.searchMoviesAndShows,
+    (state): SearchState => ({
+      ...state,
+      loading: true,
+      error: null,
+    })
+  ),
+  on(
+    SearchActions.searchMoviesAndShowsSuccess,
+    (state, { movies }): SearchState => ({
+      ...state,
+      loading: false,
+      movies: movies, // Update with Movie[] data
+    })
+  ),
+  on(
+    SearchActions.searchMoviesAndShowsFailure,
+    (state, { error }): SearchState => ({
+      ...state,
+      loading: false,
+      error: error,
+    })
+  ),
+  on(
+    SearchActions.searchMovies,
+    (state): SearchState => ({
+      ...state,
+      loading: true,
+      error: null,
+    })
+  ),
+  on(
+    SearchActions.searchMoviesSuccess,
+    (state, { movies }): SearchState => ({
+      ...state,
+      loading: false,
+      movies: movies, // Update with Movie[] data
+    })
+  ),
+  on(
+    SearchActions.searchMoviesFailure,
+    (state, { error }): SearchState => ({
+      ...state,
+      loading: false,
+      error: error,
+    })
+  ),
 
-  on(SearchActions.searchShows, state => ({
-    ...state,
-    loading: true,
-    error: null,
-  })),
-  on(SearchActions.searchShowsSuccess, (state, { shows }) => ({
-    ...state,
-    loading: false,
-    shows: shows,
-  })),
-  on(SearchActions.searchShowsFailure, (state, { error }) => ({
-    ...state,
-    loading: false,
-    error: error,
-  }))
+  on(
+    SearchActions.searchShows,
+    (state): SearchState => ({
+      ...state,
+      loading: true,
+      error: null,
+    })
+  ),
+  on(
+    SearchActions.searchShowsSuccess,
+    (state, { shows }): SearchState => ({
+      ...state,
+      loading: false,
+      shows: shows,
+    })
+  ),
+  on(
+    SearchActions.searchShowsFailure,
+    (state, { error }): SearchState => ({
+      ...state,
+      loading: false,
+      error: error,
+    })
+  )
 )

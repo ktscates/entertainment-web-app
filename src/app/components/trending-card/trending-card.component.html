@@ -9,6 +9,9 @@
   <div
     class="absolute top-5 right-5 z-10 bg-darkBlue rounded-full bg-opacity-50 p-3 cursor-pointer"
     (click)="toggleBookmark()"
+    (keyup.enter)="toggleBookmark()"
+    (keyup.space)="toggleBookmark()"
+    tabindex="0"
   >
     <app-icons
       [iconType]="isBookmarked ? 'icon-bookmark-full' : 'icon-bookmark-empty'"
