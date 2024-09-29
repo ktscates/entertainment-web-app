@@ -27,6 +27,15 @@
             "prefix": "app",
             "style": "kebab-case"
           }
+        ],
+        "no-warning-comments": [
+          "warn",
+          { "terms": ["TODO", "FIXME"], "location": "anywhere" }
+        ],
+        "no-inline-comments": "error",
+        "max-lines": [
+          "error",
+          { "max": 500, "skipBlankLines": true, "skipComments": true }
         ]
       }
     },
