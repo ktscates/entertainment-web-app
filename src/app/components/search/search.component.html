@@ -1,0 +1,11 @@
+<div
+  class="flex items-center gap-6 lg:mt-8 absolute lg:top-0 md:top-28 top-24 md:mx-8 mx-4 lg:py-8"
+>
+  <app-icons iconType="icon-search" />
+  <input
+    class="bg-transparent md:text-2xl text-white md:placeholder:text-2xl text-base placeholder:text-base"
+    type="text"
+    placeholder="Search for movies or TV series"
+    (input)="onSearch($event)"
+  />
+</div>

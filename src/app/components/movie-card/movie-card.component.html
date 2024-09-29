@@ -1,0 +1,113 @@
+@if (movie) {
+  <div class="space-y-10">
+    <div
+      class="relative w-[164px] sm:w-[220px] lg:w-[280px] h-[110px] sm:h-[140px] lg:h-[174px] group"
+    >
+      <img
+        class="rounded-lg object-cover transition-transform duration-300 group-hover:scale-95"
+        [src]="'https://image.tmdb.org/t/p/w500' + movie.backdrop_path"
+        alt="{{ movie.title || movie.name }}"
+      />
+
+      <!-- Bookmark Icon -->
+      <div
+        class="absolute top-3 right-3 z-10 bg-darkBlue rounded-full bg-opacity-50 p-2"
+        (click)="toggleBookmark()"
+      >
+        <app-icons
+          [iconType]="
+            isBookmarked ? 'icon-bookmark-full' : 'icon-bookmark-empty'
+          "
+          class="text-white"
+        />
+      </div>
+
+      <!-- Play Icon -->
+      <div
+        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      >
+        <div
+          class="text-white bg-white rounded-full bg-opacity-40 p-3 flex gap-3"
+        >
+          <app-icons iconType="icon-play" />
+          <p class="text-lg font-bold">Play</p>
+        </div>
+      </div>
+
+      <!-- Backdrop Overlay -->
+      <div
+        class="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-40"
+      ></div>
+
+      <!-- Text Overlay at Bottom -->
+      <div class="flex items-center gap-3 mt-2">
+        <p class="text-white text-base">
+          {{ movie.release_date || movie.first_air_date | date: 'y' }}
+        </p>
+        <p class="text-white flex gap-1 items-center text-base">
+          <app-icons iconType="icon-category-movie" />
+          Movie
+        </p>
+      </div>
+      <h3 class="text-white text-2xl font-bold">
+        {{ movie.title || movie.name }}
+      </h3>
+    </div>
+  </div>
+} @else {
+  <div class="space-y-10">
+    <div
+      class="relative w-[164px] sm:w-[220px] lg:w-[280px] h-[110px] sm:h-[140px] lg:h-[174px] group"
+    >
+      <img
+        class="rounded-lg object-cover transition-transform duration-300 group-hover:scale-95"
+        [src]="'https://image.tmdb.org/t/p/w500' + show.backdrop_path"
+        alt="{{ show.name }}"
+      />
+
+      <!-- Bookmark Icon -->
+      <div
+        class="absolute top-3 right-3 z-10 bg-darkBlue rounded-full bg-opacity-50 p-2"
+        (click)="toggleBookmark()"
+      >
+        <app-icons
+          [iconType]="
+            isBookmarked ? 'icon-bookmark-full' : 'icon-bookmark-empty'
+          "
+          class="text-white"
+        />
+      </div>
+
+      <!-- Play Icon -->
+      <div
+        class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      >
+        <div
+          class="text-white bg-white rounded-full bg-opacity-40 p-3 flex gap-3"
+        >
+          <app-icons iconType="icon-play" />
+          <p class="text-lg font-bold">Play</p>
+        </div>
+      </div>
+
+      <!-- Backdrop Overlay -->
+      <div
+        class="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-40"
+      ></div>
+
+      <!-- Text Overlay at Bottom -->
+      <div class="flex items-center gap-3 mt-2">
+        <p class="text-white text-base">
+          {{ show.first_air_date | date: 'y' }}
+        </p>
+        <p class="text-white flex gap-1 items-center text-base">
+          <app-icons iconType="icon-category-tv" />
+          Tv
+        </p>
+      </div>
+      <h3 class="text-white text-2xl font-bold">
+        {{ show.name }}
+      </h3>
+    </div>
+  </div>
+}

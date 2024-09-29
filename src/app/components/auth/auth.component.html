@@ -1,0 +1,133 @@
+<div
+  class="min-h-screen flex flex-col sm:py-16 py-10 items-center lg:gap-48 sm:gap-40 gap-32"
+>
+  <app-icons iconType="icon-logo" />
+
+  <div
+    class="bg-navy p-6 sm:w-[400px] sm:mx-0 mx-6 flex flex-col gap-10 justify-between rounded-xl shadow-xl text-white"
+  >
+    <h2 class="text-[32px]">{{ isSignUp ? 'Sign Up' : 'Login' }}</h2>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="">
+      <div
+        class="flex justify-between items-center border-b w-full border-grey border-opacity-50 hover:border-white"
+        [ngClass]="{
+          'border-red':
+            authForm.get('email')?.invalid && authForm.get('email')?.touched,
+        }"
+      >
+        <input
+          class="bg-transparent p-3 placeholder:text-grey text-white text-[15px] focus:outline-none"
+          type="email"
+          placeholder="Email address"
+          formControlName="email"
+        />
+        @if (authForm.get('email')?.invalid && authForm.get('email')?.touched) {
+          <div class="text-red-500 text-sm">
+            @if (authForm.get('email')?.errors?.['required']) {
+              <span class="text-red text-xs">Email is required</span>
+            }
+            @if (authForm.get('email')?.errors?.['email']) {
+              <span class="text-red text-xs">Enter a valid email</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div
+        class="my-4 flex justify-between items-center border-b w-full border-grey border-opacity-50 hover:border-white"
+        [ngClass]="{
+          'border-red':
+            authForm.get('password')?.invalid &&
+            authForm.get('password')?.touched,
+        }"
+      >
+        <input
+          class="bg-transparent p-3 placeholder:text-grey text-white text-[15px] focus:outline-none"
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Password"
+          formControlName="password"
+        />
+        @if (
+          authForm.get('password')?.invalid && authForm.get('password')?.touched
+        ) {
+          <div class="text-red-500 text-sm">
+            @if (authForm.get('password')?.errors?.['required']) {
+              <span class="text-red text-xs">Password is required</span>
+            }
+            @if (authForm.get('password')?.errors?.['minlength']) {
+              <span class="text-red text-xs"
+                >Password must be at least 6 characters</span
+              >
+            }
+          </div>
+        }
+        @if (showPassword) {
+          <app-icons (click)="togglePassword()" iconType="icon-hide-password" />
+        } @else {
+          <app-icons (click)="togglePassword()" iconType="icon-show-password" />
+        }
+      </div>
+
+      @if (isSignUp) {
+        <div
+          class="my-4 flex justify-between items-center border-b w-full border-grey border-opacity-50 hover:border-white"
+          [ngClass]="{
+            'border-red': authForm.get('confirmPassword')?.touched,
+          }"
+        >
+          <input
+            class="bg-transparent p-3 placeholder:text-grey text-white text-[15px] focus:outline-none"
+            type="password"
+            placeholder="Repeat password"
+            formControlName="confirmPassword"
+          />
+          @if (
+            authForm.get('confirmPassword')?.touched &&
+            authForm.get('confirmPassword')?.value !==
+              authForm.get('password')?.value
+          ) {
+            <div class="text-red text-xs">Passwords do not match</div>
+          }
+          @if (showPassword) {
+            <app-icons
+              (click)="togglePassword()"
+              iconType="icon-hide-password"
+            />
+          } @else {
+            <app-icons
+              (click)="togglePassword()"
+              iconType="icon-show-password"
+            />
+          }
+        </div>
+      }
+
+      @if (errorMessage) {
+        <div class="text-red text-sm mt-10 text-center">
+          {{ errorMessage }}
+        </div>
+      }
+
+      <button
+        type="submit"
+        class="bg-red text-white hover:bg-white hover:text-darkBlue w-full py-4 mt-10 rounded-md text-[15px]"
+      >
+        {{ isSignUp ? 'Create an account' : 'Login to your account' }}
+      </button>
+    </form>
+
+    <div class="text-center text-[15px]">
+      @if (isSignUp) {
+        Already have an account?
+        <button (click)="toggleMode()" class="text-red hover:text-white">
+          Login
+        </button>
+      } @else {
+        Don't have an account?
+        <button (click)="toggleMode()" class="text-red hover:text-white">
+          Sign Up
+        </button>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<app-sidenav />
+<div class="lg:ml-32 lg:px-9">
+  <app-search (search)="onSearch($event)" />
+
+  <div class="pt-32 mx-8">
+    @if (searchQuery) {
+      <div>
+        <h2 class="text-white text-4xl">
+          Found {{ (searchResults$ | async)?.length }} results for ‘{{
+            searchQuery
+          }}’
+        </h2>
+        @if (searchResults$ | async) {
+          <div
+            class="flex flex-wrap overflow-y-auto gap-24 mt-6 scrollbar-hide"
+          >
+            @for (movie of searchResults$ | async; track $index) {
+              <app-movie-card [movie]="movie"></app-movie-card>
+            }
+          </div>
+        }
+      </div>
+    }
+    <h2 class="text-white text-4xl">Trending</h2>
+    @if (trendingMovies$ | async) {
+      <div class="flex overflow-x-auto gap-6 mt-6 scrollbar-hide">
+        @for (movie of trendingMovies$ | async; track $index) {
+          <app-trending-card [movie]="movie"></app-trending-card>
+        }
+      </div>
+    }
+
+    <h2 class="text-white text-4xl py-6">Recommended for you</h2>
+    @if (recommendedMovies$ | async) {
+      <div class="flex flex-wrap overflow-y-auto gap-24 mt-6 scrollbar-hide">
+        @for (movie of recommendedMovies$ | async; track $index) {
+          <app-movie-card [movie]="movie"></app-movie-card>
+        }
+      </div>
+    }
+  </div>
+</div>

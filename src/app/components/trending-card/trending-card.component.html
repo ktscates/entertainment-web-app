@@ -1,0 +1,51 @@
+<div class="relative w-[240px] h-[140px] sm:w-[470px] sm:h-[230px] group">
+  <img
+    class="rounded-lg object-cover w-full h-full transition-transform duration-300 group-hover:scale-95"
+    [src]="'https://image.tmdb.org/t/p/w500' + movie.backdrop_path"
+    alt="{{ movie.title }}"
+  />
+
+  <!-- Bookmark Icon -->
+  <div
+    class="absolute top-5 right-5 z-10 bg-darkBlue rounded-full bg-opacity-50 p-3"
+  >
+    <app-icons iconType="icon-bookmark-empty" class="text-white" />
+  </div>
+
+  <!-- Play Icon -->
+  <div
+    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+  >
+    <div class="text-white bg-white rounded-full bg-opacity-50 p-3 flex gap-3">
+      <app-icons iconType="icon-play" />
+      <p class="text-lg font-bold">Play</p>
+    </div>
+  </div>
+
+  <!-- Backdrop Overlay -->
+  <div
+    class="absolute inset-0 bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-40"
+  ></div>
+  <!-- Adjusted opacity -->
+
+  <div class="absolute inset-0 flex flex-col justify-end rounded-lg">
+    <div class="flex items-center gap-3">
+      <p class="text-white text-base">
+        {{ movie.release_date || movie.first_air_date | date: 'y' }}
+      </p>
+      <p class="text-white flex gap-1 items-center text-base">
+        @if (movie.media_type === 'movie') {
+          <app-icons iconType="icon-category-movie" />
+        } @else {
+          <app-icons iconType="icon-category-tv" />
+        }
+        {{
+          movie.media_type.charAt(0).toUpperCase() + movie.media_type.slice(1)
+        }}
+      </p>
+    </div>
+    <h3 class="text-white text-2xl font-bold">
+      {{ movie.title || movie.name }}
+    </h3>
+  </div>
+</div>
