@@ -27,13 +27,16 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.getCurrentUser().subscribe(user => {
-      if (user) {
+    this.authService.getCurrentUserId().subscribe(userId => {
+      if (userId) {
+        // If user is logged in, navigate to home
         this.router.navigate(['/home'])
+        // Initialize bookmarks or any other user-specific data
+        this.store.dispatch(initApp())
       } else {
-        this.router.navigate(['/'])
+        // If user is not logged in, navigate to the auth page
+        this.router.navigate(['/auth'])
       }
     })
-    this.store.dispatch(initApp())
   }
 }

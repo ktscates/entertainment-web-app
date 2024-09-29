@@ -36,5 +36,15 @@ export const bookmarkReducer = createReducer(
       ...state,
       bookmarks, // Load the bookmarks from local storage
     }
-  })
+  }),
+
+  on(BookmarkActions.loadBookmarksSuccess, (state, { bookmarks }) => ({
+    ...state,
+    bookmarks,
+    error: null,
+  })),
+  on(BookmarkActions.loadBookmarksFailure, (state, { error }) => ({
+    ...state,
+    error,
+  }))
 )
