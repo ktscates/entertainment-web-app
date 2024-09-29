@@ -12,7 +12,7 @@
         </h2>
         @if (searchResults$ | async) {
           <div
-            class="flex flex-wrap overflow-y-auto gap-24 mt-6 scrollbar-hide"
+            class="lg:flex lg:flex-wrap grid sm:grid-cols-3 grid-cols-2 overflow-y-auto gap-24 mt-6 scrollbar-hide"
           >
             @for (movie of searchResults$ | async; track $index) {
               <app-movie-card [movie]="movie"></app-movie-card>
@@ -21,7 +21,7 @@
         }
       </div>
     }
-    <h2 class="text-white text-4xl">Trending</h2>
+    <h2 class="text-white text-4xl lg:my-0 my-10">Trending</h2>
     @if (trendingMovies$ | async) {
       <div class="flex overflow-x-auto gap-6 mt-6 scrollbar-hide">
         @for (movie of trendingMovies$ | async; track $index) {
@@ -32,7 +32,9 @@
 
     <h2 class="text-white text-4xl pt-8 pb-6">Recommended for you</h2>
     @if (recommendedMovies$ | async) {
-      <div class="flex flex-wrap overflow-y-auto gap-24 mt-6 scrollbar-hide">
+      <div
+        class="lg:flex lg:flex-wrap grid sm:grid-cols-3 grid-cols-2 overflow-y-auto gap-24 mt-6 scrollbar-hide"
+      >
         @for (movie of recommendedMovies$ | async; track $index) {
           <app-movie-card [movie]="movie"></app-movie-card>
         }
