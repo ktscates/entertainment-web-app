@@ -30,7 +30,7 @@
       </div>
     }
 
-    <h2 class="text-white text-4xl py-6">Recommended for you</h2>
+    <h2 class="text-white text-4xl pt-8 pb-6">Recommended for you</h2>
     @if (recommendedMovies$ | async) {
       <div class="flex flex-wrap overflow-y-auto gap-24 mt-6 scrollbar-hide">
         @for (movie of recommendedMovies$ | async; track $index) {

@@ -15,7 +15,7 @@ import * as BookmarkActions from '../../store/actions/bookmark.actions'
   styleUrl: './trending-card.component.css',
 })
 export class TrendingCardComponent implements OnInit {
-  @Input() movie!: Movie // Assuming Movie model is defined and imported
+  @Input() movie!: Movie | TvShow // Assuming Movie model is defined and imported
   bookmarks$!: Observable<(Movie | TvShow)[]>
   isBookmarked: boolean = false // Track if the item is bookmarked
 

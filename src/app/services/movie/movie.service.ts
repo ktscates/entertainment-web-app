@@ -35,9 +35,9 @@ export class MovieService {
     })
   }
 
-  getRecommendedMoviesShows(): Observable<ApiResponse<Movie | TvShow>> {
+  getRecommendedMoviesShows(): Observable<ApiResponse<Movie>> {
     const url = `${this.apiUrl}/movie/27205/recommendations?api_key=${this.apiKey}&language=en-US`
-    return this.http.get<ApiResponse<Movie | TvShow>>(url, {
+    return this.http.get<ApiResponse<Movie>>(url, {
       headers: this.getHeaders(),
     })
   }

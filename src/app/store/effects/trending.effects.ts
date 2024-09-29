@@ -5,6 +5,7 @@ import { of } from 'rxjs'
 import { catchError, map, mergeMap } from 'rxjs/operators'
 import * as TrendingActions from '../actions/trending.actions'
 import { MovieService } from '../../services/movie/movie.service'
+import { Movie, TvShow } from '../../model/model'
 
 @Injectable()
 export class TrendingEffects {
@@ -17,7 +18,9 @@ export class TrendingEffects {
       mergeMap(() =>
         this.movieService.getTrendingMoviesShow().pipe(
           map(response => {
-            const movies = response.results
+            const movies: Movie[] = response.results.filter(
+              (item: Movie | TvShow): item is Movie => 'title' in item
+            )
             console.log('Fetched movies:', movies) // Log the response
 
             return TrendingActions.fetchTrendingMoviesSuccess({ movies })

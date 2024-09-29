@@ -6,7 +6,7 @@ import { Observable } from 'rxjs'
 import { CommonModule } from '@angular/common'
 import { Store } from '@ngrx/store'
 import * as SearchActions from '../../store/actions/search.actions'
-import { Movie } from '../../model/model'
+import { Movie, TvShow } from '../../model/model'
 import * as searchSelectors from '../../store/selectors/search.selectors'
 import * as TrendingSelectors from '../../store/selectors/trending.selectors'
 import { MovieCardComponent } from '../movie-card/movie-card.component'
@@ -29,7 +29,7 @@ import { loadInitialMovies } from '../../store/actions/movie.actions'
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  trendingMovies$!: Observable<Movie[]> // Observable for trending movies
+  trendingMovies$!: Observable<(Movie | TvShow)[]> // Observable for trending movies
   recommendedMovies$!: Observable<Movie[]>
   searchResults$!: Observable<Movie[]> // Observable for search results
   error$!: Observable<unknown> // Error observable

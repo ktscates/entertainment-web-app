@@ -1,10 +1,10 @@
 // reducers/trending.reducer.ts
 import { createReducer, on } from '@ngrx/store'
 import * as TrendingActions from '../actions/trending.actions'
-import { Movie } from '../../model/model'
+import { Movie, TvShow } from '../../model/model'
 
 export interface TrendingState {
-  movies: Movie[]
+  movies: (Movie | TvShow)[]
   error: string | null
 }
 

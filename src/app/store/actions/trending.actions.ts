@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { Movie } from '../../model/model'
+import { Movie, TvShow } from '../../model/model'
 
 export const fetchTrendingMovies = createAction(
   '[Movies] Fetch Trending Movies'
@@ -7,7 +7,7 @@ export const fetchTrendingMovies = createAction(
 
 export const fetchTrendingMoviesSuccess = createAction(
   '[Movies] Fetch Trending Movies Success',
-  props<{ movies: Movie[] }>()
+  props<{ movies: (Movie | TvShow)[] }>()
 )
 
 export const fetchTrendingMoviesFailure = createAction(
