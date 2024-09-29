@@ -11,7 +11,6 @@ export class BookmarkService {
 
   constructor(private authService: AuthService) {}
 
-  // Helper function to get the current user's bookmark key
   private getUserBookmarkKey(userId: string): string {
     return `${this.BOOKMARK_KEY_PREFIX}${userId}`
   }
@@ -24,13 +23,12 @@ export class BookmarkService {
           const bookmarks = JSON.parse(localStorage.getItem(key) || '[]')
           return of(bookmarks)
         } else {
-          return of([]) // Return empty array if no user is logged in
+          return of([])
         }
       })
     )
   }
 
-  // Save bookmarks for the current user
   saveBookmarks(bookmarks: (Movie | TvShow)[]): void {
     this.authService.getCurrentUserId().subscribe(userId => {
       if (userId) {
@@ -40,7 +38,6 @@ export class BookmarkService {
     })
   }
 
-  // Check if a specific item is bookmarked
   isBookmarked(item: Movie | TvShow): Observable<boolean> {
     return this.getBookmarks().pipe(
       switchMap(bookmarks => {
@@ -53,12 +50,9 @@ export class BookmarkService {
   toggleBookmark(item: Movie | TvShow): void {
     this.getBookmarks().subscribe(bookmarks => {
       let updatedBookmarks: (Movie | TvShow)[]
-
       if (bookmarks.some(bookmark => bookmark.id === item.id)) {
-        // Remove the bookmark
         updatedBookmarks = bookmarks.filter(bookmark => bookmark.id !== item.id)
       } else {
-        // Add the bookmark
         updatedBookmarks = [...bookmarks, item]
       }
 
@@ -66,10 +60,7 @@ export class BookmarkService {
     })
   }
 
-  // Method to load bookmarks on app initialization
   loadBookmarks(): void {
-    this.getBookmarks().subscribe(bookmarks => {
-      console.log('Loading bookmarks from localStorage:', bookmarks)
-    })
+    this.getBookmarks()
   }
 }

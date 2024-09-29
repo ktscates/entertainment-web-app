@@ -24,7 +24,7 @@ export interface TvShow {
   first_air_date: string
   genre_ids: number[]
   id: number
-  media_type: string // "tv"
+  media_type: string
   name: string
   origin_country: string[]
   original_language: string
@@ -40,5 +40,4 @@ export interface TvShow {
 
 export interface ApiResponse<T> {
   results: T[]
-  // Add pagination properties if needed
 }

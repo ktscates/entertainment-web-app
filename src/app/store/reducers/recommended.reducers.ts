@@ -1,7 +1,7 @@
 // reducers/trending.reducer.ts
 import { createReducer, on } from '@ngrx/store'
 import * as RecommendedMovieActions from '../actions/recommended.actions'
-import { Movie, TvShow } from '../../model/model'
+import { Movie } from '../../model/model'
 
 export interface RecommendedMovieState {
   movies: Movie[]

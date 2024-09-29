@@ -21,7 +21,7 @@ export class TrendingEffects {
             const movies: Movie[] = response.results.filter(
               (item: Movie | TvShow): item is Movie => 'title' in item
             )
-            console.log('Fetched movies:', movies) // Log the response
+            console.log('Fetched movies:', movies)
 
             return TrendingActions.fetchTrendingMoviesSuccess({ movies })
           }),

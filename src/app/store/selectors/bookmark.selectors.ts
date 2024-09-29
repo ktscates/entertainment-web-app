@@ -9,8 +9,3 @@ export const selectAllBookmarks = createSelector(
   selectBookmarkState,
   state => state.bookmarks
 )
-
-// export const isBookmarked = (itemId: number) =>
-//   createSelector(selectBookmarkState, state =>
-//     state.bookmarks.some(item => item.id === itemId)
-//   )

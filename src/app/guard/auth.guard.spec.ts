@@ -25,7 +25,6 @@ describe('AuthGuard', () => {
         { provide: Router, useValue: routerMock },
       ],
     })
-
     guard = TestBed.inject(AuthGuard)
     authService = TestBed.inject(AuthService)
     router = TestBed.inject(Router)
@@ -33,7 +32,6 @@ describe('AuthGuard', () => {
 
   it('should return true if the user is authenticated', () => {
     jest.spyOn(authService, 'getCurrentUserId').mockReturnValue(of('userId'))
-
     guard.canActivate().subscribe(result => {
       expect(result).toBe(true)
     })
@@ -41,7 +39,6 @@ describe('AuthGuard', () => {
 
   it('should navigate to /auth and return false if the user is not authenticated', () => {
     jest.spyOn(authService, 'getCurrentUserId').mockReturnValue(of(null))
-
     guard.canActivate().subscribe(result => {
       expect(result).toBe(false)
       expect(router.navigate).toHaveBeenCalledWith(['/auth'])
@@ -52,7 +49,6 @@ describe('AuthGuard', () => {
     jest
       .spyOn(authService, 'getCurrentUserId')
       .mockReturnValue(throwError(() => new Error('error')))
-
     guard.canActivate().subscribe(result => {
       expect(result).toBe(false)
       expect(router.navigate).toHaveBeenCalledWith(['/auth'])

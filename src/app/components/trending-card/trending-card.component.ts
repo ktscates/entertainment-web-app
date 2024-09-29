@@ -15,9 +15,9 @@ import * as BookmarkActions from '../../store/actions/bookmark.actions'
   styleUrl: './trending-card.component.css',
 })
 export class TrendingCardComponent implements OnInit {
-  @Input() movie!: Movie | TvShow // Assuming Movie model is defined and imported
+  @Input() movie!: Movie | TvShow
   bookmarks$!: Observable<(Movie | TvShow)[]>
-  isBookmarked: boolean = false // Track if the item is bookmarked
+  isBookmarked: boolean = false
 
   constructor(private store: Store) {
     this.bookmarks$ = this.store.select(selectAllBookmarks)
@@ -26,14 +26,12 @@ export class TrendingCardComponent implements OnInit {
   ngOnInit() {
     this.bookmarks$.subscribe(bookmarks => {
       this.isBookmarked = bookmarks.some(b => b.id === this.movie?.id)
-      console.log('Bookmarked state:', this.isBookmarked) // Check if bookmark state is set
     })
   }
 
   toggleBookmark() {
     const item = this.movie
     if (item) {
-      console.log('Item toggling:', item)
       if (this.isBookmarked) {
         this.store.dispatch(BookmarkActions.removeBookmark({ itemId: item.id }))
       } else {

@@ -24,34 +24,26 @@ import { MovieCardComponent } from '../movie-card/movie-card.component'
   styleUrl: './movie.component.css',
 })
 export class MovieComponent implements OnInit {
-  movies$!: Observable<Movie[]> // Observable for trending movies
-  searchResults$!: Observable<Movie[]> // Observable for search results
-  error$!: Observable<unknown> // Error observable
+  movies$!: Observable<Movie[]>
+  searchResults$!: Observable<Movie[]>
+  error$!: Observable<unknown>
   searchQuery: string = ''
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    // Initialize observables here
     this.movies$ = this.store.select(MovieSelectors.selectMovies)
     this.searchResults$ = this.store.select(searchSelectors.selectMovies)
     this.error$ = this.store.select(searchSelectors.selectError)
 
-    // Fetch trending movies on init
     this.store.dispatch(MovieActions.fetchMovies())
-    this.movies$.subscribe(movies => console.log('Trending Movies:', movies))
-    this.searchResults$.subscribe(results =>
-      console.log('Search Results:', results)
-    )
   }
 
   onSearch(query: string): void {
     if (query.trim() === '') {
       return
     }
-
-    this.searchQuery = query // Update searchQuery with the new query
-    console.log('Search Query:', query)
+    this.searchQuery = query
     this.store.dispatch(SearchActions.searchMovies({ query }))
   }
 }

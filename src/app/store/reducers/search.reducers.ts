@@ -3,7 +3,7 @@ import { Movie, TvShow } from '../../model/model'
 import * as SearchActions from '../actions/search.actions'
 
 export interface SearchState {
-  movies: Movie[] // Now typed with Movie[]
+  movies: Movie[]
   shows: TvShow[]
   loading: boolean
   error: unknown
@@ -31,7 +31,7 @@ export const searchReducer = createReducer(
     (state, { movies }): SearchState => ({
       ...state,
       loading: false,
-      movies: movies, // Update with Movie[] data
+      movies: movies,
     })
   ),
   on(

@@ -2,15 +2,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { map, Observable } from 'rxjs'
 import { Movie, TvShow, ApiResponse } from '../../model/model'
+import { environment } from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
 })
 export class MovieService {
   private apiUrl = 'https://api.themoviedb.org/3'
-  private apiKey = 'c40cb525ac8706f5611fc6cfe4c1419b'
-  private apiToken =
-    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNDBjYjUyNWFjODcwNmY1NjExZmM2Y2ZlNGMxNDE5YiIsIm5iZiI6MTcyNzQyNDg0NC43NzcxNTUsInN1YiI6IjYwY2YxMGMxOWMyNGZjMDA1OGIyZjgyMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.bB0NNR_rpNO0yXd4JxWcSQ80jcESlL8mMiy_I6S_S_c'
+  private apiKey = environment.apiKey
+  private apiToken = environment.apiToken
 
   constructor(private http: HttpClient) {}
 

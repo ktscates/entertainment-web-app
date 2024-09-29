@@ -20,7 +20,7 @@ export class MovieEffects {
         this.movieService.getMovies().pipe(
           map(response => {
             const movies = response.results
-            console.log('Fetched movies:', movies) // Log the response
+            console.log('Fetched movies:', movies)
 
             return MovieActions.fetchMoviesSuccess({ movies })
           }),

@@ -19,7 +19,7 @@ export class MovieCardComponent implements OnInit {
   @Input() show!: TvShow
   @Input() item!: Movie | TvShow
   bookmarks$!: Observable<(Movie | TvShow)[]>
-  isBookmarked: boolean = false // Track if the item is bookmarked
+  isBookmarked: boolean = false
 
   constructor(private store: Store) {
     this.bookmarks$ = this.store.select(selectAllBookmarks)
@@ -28,18 +28,16 @@ export class MovieCardComponent implements OnInit {
   ngOnInit() {
     this.bookmarks$.subscribe(bookmarks => {
       this.isBookmarked = bookmarks.some(b => b.id === this.getItemId())
-      console.log('Bookmarked state:', this.isBookmarked) // Check if bookmark state is set
     })
   }
 
   getItemId(): number | undefined {
-    return this.movie?.id || this.show?.id // Return ID from either movie or show
+    return this.movie?.id || this.show?.id
   }
 
   toggleBookmark() {
     const item = this.movie || this.show
     if (item) {
-      console.log('Item toggling:', item)
       if (this.isBookmarked) {
         this.store.dispatch(BookmarkActions.removeBookmark({ itemId: item.id }))
       } else {

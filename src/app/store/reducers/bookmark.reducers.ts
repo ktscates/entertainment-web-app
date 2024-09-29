@@ -18,14 +18,14 @@ const initialState: BookmarkState = {
 export const bookmarkReducer = createReducer(
   initialState,
   on(BookmarkActions.addBookmark, (state, { item }): BookmarkState => {
-    console.log('Adding to bookmarks:', item) // Log to check item being added
+    console.log('Adding to bookmarks:', item)
     return {
       ...state,
       bookmarks: [...state.bookmarks, item],
     }
   }),
   on(BookmarkActions.removeBookmark, (state, { itemId }): BookmarkState => {
-    console.log('Removing bookmark with ID:', itemId) // Log to check item being removed
+    console.log('Removing bookmark with ID:', itemId)
     return {
       ...state,
       bookmarks: state.bookmarks.filter(bookmark => bookmark.id !== itemId),
@@ -36,7 +36,7 @@ export const bookmarkReducer = createReducer(
     const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]')
     return {
       ...state,
-      bookmarks, // Load the bookmarks from local storage
+      bookmarks,
     }
   }),
 

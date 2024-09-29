@@ -23,11 +23,10 @@ import { TrendingCardComponent } from '../trending-card/trending-card.component'
   styleUrl: './bookmark.component.css',
 })
 export class BookmarkComponent implements OnInit {
-  bookmarkMovies$!: Observable<(Movie | TvShow)[]> // Observable to hold the bookmarks
-  error$!: Observable<string | null> // Error observable
+  bookmarkMovies$!: Observable<(Movie | TvShow)[]>
+  error$!: Observable<string | null>
   searchQuery: string = ''
-  searchResults$!: Observable<(Movie | TvShow)[]> // Observable for search results
-
+  searchResults$!: Observable<(Movie | TvShow)[]>
   constructor(private store: Store) {}
 
   ngOnInit(): void {
@@ -39,7 +38,6 @@ export class BookmarkComponent implements OnInit {
 
   onSearch(query: string): void {
     this.searchQuery = query
-    // Update the search results whenever the query changes
     this.searchResults$ = this.bookmarkMovies$.pipe(
       map(bookmarks => this.filterBookmarks(bookmarks, this.searchQuery))
     )
@@ -50,7 +48,7 @@ export class BookmarkComponent implements OnInit {
     query: string
   ): (Movie | TvShow)[] {
     if (!query) {
-      return bookmarks // Return all bookmarks if the query is empty
+      return bookmarks
     }
 
     return bookmarks.filter(item => {

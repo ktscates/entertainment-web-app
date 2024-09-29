@@ -18,7 +18,7 @@ export class RecommendedMoviesEffects {
         this.movieService.getRecommendedMoviesShows().pipe(
           map(response => {
             const movies = response.results
-            console.log('Fetched movies:', movies) // Log the response
+            console.log('Fetched movies:', movies)
 
             return RecommendedMovieActions.fetchRecommendedMoviesSuccess({
               movies,

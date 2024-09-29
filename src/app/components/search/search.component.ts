@@ -13,8 +13,6 @@ export class SearchComponent {
 
   onSearch(event: Event): void {
     const input = (event.target as HTMLInputElement).value
-    console.log('Emitting search:', input) // Add this line
-
     this.search.emit(input)
   }
 }

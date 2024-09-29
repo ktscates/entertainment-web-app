@@ -18,7 +18,7 @@ export class ShowEffects {
         this.movieService.getShows().pipe(
           map(response => {
             const shows = response.results
-            console.log('Fetched movies:', shows) // Log the response
+            console.log('Fetched movies:', shows)
 
             return ShowActions.fetchShowsSuccess({ shows })
           }),

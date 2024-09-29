@@ -55,24 +55,20 @@ export class AuthComponent {
         return
       }
       this.authService.signUp(email, password).then(
-        res => {
-          console.log('Signup Successful!', res)
+        () => {
           this.router.navigate(['/home'])
         },
         err => {
           this.errorMessage = `Signup failed: ${err.message}`
-          console.log(err)
         }
       )
     } else {
       this.authService.login(email, password).then(
-        res => {
-          console.log('Login Successful!', res)
+        () => {
           this.router.navigate(['/home'])
         },
-        err => {
+        () => {
           this.errorMessage = `Login failed: Invalid credentials`
-          console.log(err)
         }
       )
     }

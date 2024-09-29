@@ -24,7 +24,6 @@ export class BookmarkEffects {
       this.actions$.pipe(
         ofType(BookmarkActions.removeBookmark),
         tap(({ itemId }) => {
-          // Fetch the current user's bookmarks, then filter and save updated list
           this.bookmarkService.getBookmarks().subscribe(bookmarks => {
             const updatedBookmarks = bookmarks.filter(b => b.id !== itemId)
             this.bookmarkService.saveBookmarks(updatedBookmarks)
@@ -36,14 +35,12 @@ export class BookmarkEffects {
 
   loadBookmarks$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(BookmarkActions.initApp), // Listen for the initApp action
+      ofType(BookmarkActions.initApp),
       switchMap(() =>
         this.bookmarkService.getBookmarks().pipe(
-          map(
-            bookmarks => BookmarkActions.loadBookmarksSuccess({ bookmarks }) // Dispatch success action with bookmarks
-          ),
-          catchError(
-            error => of(BookmarkActions.loadBookmarksFailure({ error })) // Handle error case
+          map(bookmarks => BookmarkActions.loadBookmarksSuccess({ bookmarks })),
+          catchError(error =>
+            of(BookmarkActions.loadBookmarksFailure({ error }))
           )
         )
       )

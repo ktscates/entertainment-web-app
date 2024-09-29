@@ -7,7 +7,6 @@ import { Store } from '@ngrx/store'
 import * as searchSelectors from '../../store/selectors/search.selectors'
 import * as ShowSelectors from '../../store/selectors/shows.selectors'
 import * as ShowActions from '../../store/actions/shows.actions'
-import * as SearchActions from '../../store/actions/search.actions'
 import { CommonModule } from '@angular/common'
 import { MovieCardComponent } from '../movie-card/movie-card.component'
 
@@ -24,34 +23,24 @@ import { MovieCardComponent } from '../movie-card/movie-card.component'
   styleUrl: './tv-show.component.css',
 })
 export class TvShowComponent implements OnInit {
-  shows$!: Observable<TvShow[]> // Observable for trending movies
-  searchResults$!: Observable<TvShow[]> // Observable for search results
-  error$!: Observable<unknown> // Error observable
+  shows$!: Observable<TvShow[]>
+  searchResults$!: Observable<TvShow[]>
+  error$!: Observable<unknown>
   searchQuery: string = ''
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    // Initialize observables here
     this.shows$ = this.store.select(ShowSelectors.selectShows)
     this.searchResults$ = this.store.select(searchSelectors.selectShows)
     this.error$ = this.store.select(searchSelectors.selectError)
-
-    // Fetch trending movies on init
     this.store.dispatch(ShowActions.fetchShows())
-    this.shows$.subscribe(shows => console.log('Trending Movies:', shows))
-    this.searchResults$.subscribe(results =>
-      console.log('Search Results:', results)
-    )
   }
 
   onSearch(query: string): void {
     if (query.trim() === '') {
       return
     }
-
-    this.searchQuery = query // Update searchQuery with the new query
-    console.log('Search Query:', query)
-    this.store.dispatch(SearchActions.searchMovies({ query }))
+    this.searchQuery = query
   }
 }

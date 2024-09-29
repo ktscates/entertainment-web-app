@@ -29,16 +29,15 @@ import { loadInitialMovies } from '../../store/actions/movie.actions'
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  trendingMovies$!: Observable<(Movie | TvShow)[]> // Observable for trending movies
+  trendingMovies$!: Observable<(Movie | TvShow)[]>
   recommendedMovies$!: Observable<Movie[]>
-  searchResults$!: Observable<Movie[]> // Observable for search results
-  error$!: Observable<unknown> // Error observable
+  searchResults$!: Observable<Movie[]>
+  error$!: Observable<unknown>
   searchQuery: string = ''
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    // Initialize observables here
     this.trendingMovies$ = this.store.select(
       TrendingSelectors.selectTrendingMovies
     )
@@ -49,7 +48,6 @@ export class HomeComponent implements OnInit {
       searchSelectors.selectMoviesAndShows
     )
     this.error$ = this.store.select(searchSelectors.selectError)
-
     this.store.dispatch(loadInitialMovies())
   }
 
@@ -57,9 +55,7 @@ export class HomeComponent implements OnInit {
     if (query.trim() === '') {
       return
     }
-
     this.searchQuery = query
-    console.log('Search Query:', query)
     this.store.dispatch(SearchActions.searchMoviesAndShows({ query }))
   }
 }

@@ -5,15 +5,11 @@ import { of } from 'rxjs'
 import { MovieService } from '../../services/movie/movie.service'
 import * as SearchActions from '../actions/search.actions'
 import { Movie, TvShow } from '../../model/model'
-import { BookmarkService } from '../../services/bookmark/bookmark.service'
 
 @Injectable()
 export class SearchEffects {
   private actions$ = inject(Actions)
-  constructor(
-    private movieService: MovieService,
-    private bookmarkService: BookmarkService
-  ) {}
+  constructor(private movieService: MovieService) {}
 
   searchMoviesAndShows$ = createEffect(() =>
     this.actions$.pipe(
@@ -21,7 +17,6 @@ export class SearchEffects {
       mergeMap(({ query }) =>
         this.movieService.searchMoviesAndShows(query).pipe(
           map((results: (Movie | TvShow)[]) => {
-            // Filter the results to only include movies
             const movies = results.filter(
               (item): item is Movie => 'title' in item
             )
