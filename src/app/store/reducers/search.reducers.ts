@@ -55,7 +55,7 @@ export const searchReducer = createReducer(
     (state, { movies }): SearchState => ({
       ...state,
       loading: false,
-      movies: movies, // Update with Movie[] data
+      movies: movies,
     })
   ),
   on(

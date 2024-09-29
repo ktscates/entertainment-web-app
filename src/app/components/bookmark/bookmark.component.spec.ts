@@ -97,7 +97,7 @@ describe('BookmarkComponent', () => {
     component.searchResults$.subscribe(results => {
       expect(results).toEqual([mockTvShows[0]])
     })
-    component.onSearch('') // Reset the search
+    component.onSearch('')
     component.searchResults$.subscribe(results => {
       expect(results).toEqual([...mockMovies, ...mockTvShows])
     })
